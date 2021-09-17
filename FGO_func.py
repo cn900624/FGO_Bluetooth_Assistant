@@ -82,9 +82,9 @@ def apple_feed():
     
     silverFlag,silverPosition = Base_func.match_template("Silver_apple")          #check similarity between highlight and normal icon   
     if silverFlag:
-        Serial.touch(silverFlag[0],silverPosition[1])
+        Serial.touch(silverPosition[0],silverPosition[1])
         time.sleep(1.5)            
-        Serial.touch(710,470)   #决定
+        Serial.touch(550,313)   #决定
         gc.num_SilverApple_used += 1
         print(" Feed silver apple success")
         return
@@ -93,7 +93,7 @@ def apple_feed():
     if goldFlag:
         Serial.touch(goldPosition[0],goldPosition[1])
         time.sleep(1.5)                
-        Serial.touch(710,470) #决定
+        Serial.touch(550,313) #决定
         gc.num_GoldApple_used += 1
         print(" Feed gold apple success")
         return
@@ -198,7 +198,7 @@ def card(NoblePhantasm_no=1):
 def battle(): 
     #判断是否进入战斗界面
     #Serial.mouse_set_zero()         #鼠标复位,防止误差累积
-    Serial.touch(773,371)      
+    Serial.touch(773,365)      
     print(" Start battle button pressed")
     time.sleep(8)                          #等待战斗开始
     WaitForBattleStart()    
@@ -221,7 +221,7 @@ def main():
     #Serial.port_open(port_no)   #写入通讯的串口号
     Base_func.init_wormhole()
     Serial.mouse_set_zero()
-    FGO_process(1,"Caster_Altria")
+    FGO_process(2,"Caster_Altria")
     #Serial.port_close()
     print(" All done!") 
         

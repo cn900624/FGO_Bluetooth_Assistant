@@ -22,7 +22,7 @@ def Chaldea_Combat_Uniform(*args):
             Serial.touch(716,173)                           
             Serial.touch(485+(args[2]-1)*113,200)        
             Serial.touch(147+(args[1]-1)*113,200)        
-            Serial.touch(530,530)
+            Serial.touch(430,350)
             
     Hanlder(*args)
 

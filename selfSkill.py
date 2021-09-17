@@ -8,7 +8,7 @@ def FirstLevel():
     fc.character_skill(3,2,1)
     fc.character_skill(3,1)
     # 换C呆
-    fc.Master_skill(3,3,1)
+    fc.Master_skill(Mystic_Codes.Chaldea_Combat_Uniform,3,3,1)
     # 2号C呆
     fc.character_skill(3,3,1)
     fc.character_skill(3,2,1)
@@ -22,7 +22,7 @@ def FirstLevel():
     # 迦摩
     fc.character_skill(2,2)
     fc.character_skill(2,3)
-    fc.card()
+    fc.card(2)
     time.sleep(10)
     fc.WaitForBattleStart()
     # 第三T
