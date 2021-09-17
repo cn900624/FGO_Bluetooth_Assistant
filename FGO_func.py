@@ -58,7 +58,7 @@ def WaitForBattleStart():
         fuse.increase()
         fuse.alarm()
     fuse.reset()
-    time.sleep(0.3) 
+    time.sleep(0.2) 
 
         
 def WaitForFriendShowReady():
@@ -201,10 +201,10 @@ def battle():
     
     Serial.touch(773,365)      
     print(" Start battle button pressed")
-    time.sleep(8)                          #等待战斗开始
+    time.sleep(6)                          #等待战斗开始
     WaitForBattleStart()  
     Serial.mouse_set_zero()         #鼠标复位,防止误差累积  
-    time.sleep(1)   
+    time.sleep(0.5)   
     # time.sleep(6)                   #等待6秒，因为礼装效果掉落暴击星会耗时
     selfSkill.FirstLevel() #设定好的技能模块
 
@@ -224,7 +224,7 @@ def main():
     #Serial.port_open(port_no)   #写入通讯的串口号
     Base_func.init_wormhole()
     Serial.mouse_set_zero()
-    FGO_process(4,"Caster_Altria")
+    FGO_process(10,"Caster_Altria")
     #Serial.port_close()
     print(" All done!") 
         
