@@ -28,6 +28,8 @@ def FirstLevel():
     # 第三T
     fc.character_skill(1,2,2)
     fc.character_skill(1,3)
+    fc.character_skill(2,1,1)
+    fc.Master_skill(Mystic_Codes.Chaldea_Combat_Uniform,1)
     fc.card()
 
 def SecondLevel():

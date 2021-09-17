@@ -21,7 +21,7 @@ fuse = Base_func.Fuse()
 #无限池抽取函数
 def InfinatePool():
     Serial.mouse_set_zero()
-    Serial.mouse_move((320,360))
+    Serial.mouse_move((316,250))
     for i in range(100):
         Serial.mouse_click()
 '''
