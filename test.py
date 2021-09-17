@@ -17,7 +17,7 @@ import Base_func_wormhole as Base_func
 
 Base_func.init_wormhole()
 
-
+print(1)
 # op.FriendPointSummon(2.5)
 # for i in range(10):
 #     op.Upgrade()

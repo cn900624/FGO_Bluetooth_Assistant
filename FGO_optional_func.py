@@ -29,7 +29,7 @@ def InfinatePool():
 def getpos():
     orgpos = ag.position()
     zero_x = 1479
-    zero_y = 16
+    zero_y = gc.wormholeHeight
     px = orgpos[0] - zero_x
     py = orgpos[1] - zero_y
     return (px, py)

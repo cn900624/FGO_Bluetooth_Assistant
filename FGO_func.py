@@ -33,7 +33,7 @@ def enter_battle():
     if menuFlag:
         LastOrderFlag,Position3 = Base_func.match_template("LastOrder_sign")
         if LastOrderFlag:
-            Serial.touch(Position3[0]+230,Position3[1]+50)
+            Serial.touch(Position3[0],Position3[1])
             print("Entered last order success")
             return "LastOrder"
         else:
@@ -41,7 +41,7 @@ def enter_battle():
             print("Entered default success")
             return "Default"
     elif reenterFlag:
-        Serial.touch(705,475) 
+        Serial.touch(Position2[0],Position2[1]) 
         print("Reentered battle success") 
         return "Reenter"
     else:
@@ -81,7 +81,7 @@ def apple_feed():
     
     silverFlag,silverPosition = Base_func.match_template("Silver_apple")          #check similarity between highlight and normal icon   
     if silverFlag:
-        Serial.touch(709,silverPosition[1])
+        Serial.touch(silverFlag[0],silverPosition[1])
         time.sleep(1.5)            
         Serial.touch(710,470)   #决定
         gc.num_SilverApple_used += 1
@@ -90,7 +90,7 @@ def apple_feed():
     
     goldFlag,goldPosition = Base_func.match_template("Gold_apple")
     if goldFlag:
-        Serial.touch(709,goldPosition[1])
+        Serial.touch(goldPosition[0],goldPosition[1])
         time.sleep(1.5)                
         Serial.touch(710,470) #决定
         gc.num_GoldApple_used += 1
@@ -110,10 +110,10 @@ def find_friend(servant):
     while not(foundFlag):
         print(" Didn't find {}, retry. Attempt{}".format(servant,attemptnum))
         #Flag,Position = Base_func.match_template('Refresh_friend')
-        Serial.touch(720,110)   #refresh     
+        Serial.touch(514,74)   #refresh     
         time.sleep(0.5)
         #Flag,Position = Base_func.match_template('Refresh_decide')
-        Serial.touch(705,475)   #decide
+        Serial.touch(541,310)   #decide
         WaitForFriendShowReady()   
         foundFlag,Position = Base_func.match_template(servant+"_skill_level")
         attemptnum += 1
@@ -153,12 +153,12 @@ def quit_battle():
         print(" 翻车，进入补刀程序")          #翻车检测
         budao()
     print(" Battle finished")
-    time.sleep(1)
-    rainbowFlag,Position = Base_func.match_template("Rainbow_box")  #检测是否掉礼装，若掉落则短信提醒  
-    if rainbowFlag:
-        gc.num_Craft += 1
-    Serial.touch(986,565,6)    
-    Serial.touch(235,525,2)                #拒绝好友申请
+    time.sleep(3)
+    # rainbowFlag,Position = Base_func.match_template("Rainbow_box")  #检测是否掉礼装，若掉落则短信提醒  
+    # if rainbowFlag:
+    #     gc.num_Craft += 1
+    Serial.touch(690,350,6)    
+    Serial.touch(266,343,2)                #拒绝好友申请
     Serial.mouse_set_zero()         #鼠标复位,防止误差累积
     print(" Quit success")
     time.sleep(1)
@@ -166,7 +166,7 @@ def quit_battle():
 
 #improve        
 def Master_skill(func = Mystic_Codes.Chaldea_Combat_Uniform, *args):
-    Serial.touch(1010,266)               #御主技能按键
+    Serial.touch(780,180)               #御主技能按键
     func(*args)
     time.sleep(1)    
     WaitForBattleStart()
@@ -175,10 +175,10 @@ def Master_skill(func = Mystic_Codes.Chaldea_Combat_Uniform, *args):
 
     
 def character_skill(character_no,skill_no,para=None):   #角色编号，技能编号，选人（可选）
-    charPos = (65+(character_no-1)*270+(skill_no-1)*80,488)
+    charPos = (66+(character_no-1)*175+(skill_no-1)*50,306)
     Serial.touch(charPos[0],charPos[1])    
     if para != None:
-        targetPos = (280+(para-1)*250,350)  #技能选人
+        targetPos = (246+(para-1)*175,245)  #技能选人
         Serial.touch(targetPos[0],targetPos[1])        
     time.sleep(3)         #等待技能动画时间
     WaitForBattleStart()
@@ -186,18 +186,18 @@ def character_skill(character_no,skill_no,para=None):   #角色编号，技能�
 
     
 def card(NoblePhantasm_no=1):    
-    Serial.touch(960,510)   #点击attack按钮 
+    Serial.touch(730,335)   #点击attack按钮 
     time.sleep(2)       
-    Serial.touch(350+(NoblePhantasm_no-1)*200,200)   #打手宝具,参数可选1-3号宝具位
+    Serial.touch(300+(NoblePhantasm_no-1)*140,110)   #打手宝具,参数可选1-3号宝具位
     Card_index = random.sample(range(0,4),2) #随机两张牌   
-    Serial.touch(115+(Card_index[0])*215,430)          
-    Serial.touch(115+(Card_index[1])*215,430)    
+    Serial.touch(141+(Card_index[0])*152,285)          
+    Serial.touch(141+(Card_index[1])*152,285)    
     print(" Card has pressed")
     
 def battle(): 
     #判断是否进入战斗界面
     #Serial.mouse_set_zero()         #鼠标复位,防止误差累积
-    Serial.touch(1005,570)      
+    Serial.touch(773,371)      
     print(" Start battle button pressed")
     time.sleep(8)                          #等待战斗开始
     WaitForBattleStart()    

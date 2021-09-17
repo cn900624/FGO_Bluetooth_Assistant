@@ -7,21 +7,24 @@ Created on Sun Aug  1 22:16:33 2021
 import win32con, win32api
 
 
-default_dir = r"G:\FGO\FGO_Bluetooth_Assistant"
-template_path_str = "G:/FGO/FGO_Bluetooth_Assistant/Template/"
+default_dir = r"E:\Documents\GitHub\FGO_Bluetooth_Assistant"
+template_path_str = "E:\Documents\GitHub\FGO_Bluetooth_Assistant/Template/"
 const_phone = "iPhone12"
 
 
+# bias:游戏蓝条宽度 9.3更新后为0 
+# 21 虫洞宽 16高
+# 1080*607    leng-2*bias-2*21=1080  649-16-26=607
+# 864*400  宽 
 
-
-config = {"iPhone6":{"name":"Wormhole(iPhone)","length":1122,"bias":0},
-          "iPhone12":{"name":"Wormhole(Paul)","length":1357,"bias":117},
-          "iPadmini4":{"name":"Wormhole(iPad (2))","length":1358,"bias":117}}
-
+config = {"iPhone6":{"name":"Wormhole(iPhone11)","length":1122,"bias":0},
+          "iPhone12":{"name":"Wormhole(iPhone)","length":906,"bias":0},
+          "iPadmini4":{"name":"Wormhole(iPad (2))","length":1122,"bias":0}}
+wormholeHeight=20
+wormholeWeight=21
 const_position = win32api.GetSystemMetrics(win32con.SM_CXSCREEN) - \
-                    (config[const_phone]["length"] - config[const_phone]["bias"] - 21)
-                    
-const_interface_origin = (const_position+21+config[const_phone]["bias"], 0+16)
+                    (config[const_phone]["length"]  - wormholeWeight)
+const_interface_origin = (const_position+wormholeWeight, 0+wormholeHeight)
 
 
 num_GoldApple_used = 0
