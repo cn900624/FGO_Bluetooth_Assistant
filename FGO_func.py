@@ -11,6 +11,7 @@ import Serial_wormhole as Serial
 import Base_func_wormhole as Base_func
 import Mystic_Codes
 import Global_Config as gc
+import selfSkill
 #from Notice import sent_message
 
 
@@ -18,29 +19,29 @@ sys.path.append(gc.default_dir)
 fuse = Base_func.Fuse()
 
 def enter_battle():
-    menuFlag,Position1 = Base_func.match_template("Menu_button")
+    # menuFlag,Position1 = Base_func.match_template("Menu_button")
     reenterFlag,Position2 = Base_func.match_template("reenter_battle")
     #print('Flag now: ', menu, "Position now: ", Position )   
     
-    while not(menuFlag or reenterFlag):
+    while not(reenterFlag):
         time.sleep(1)       #Original value is 1
-        menuFlag,Position1 = Base_func.match_template("Menu_button")
+        #menuFlag,Position1 = Base_func.match_template("Menu_button")
         reenterFlag,Position2 = Base_func.match_template("reenter_battle")
         fuse.increase()
         fuse.alarm()        
     fuse.reset()
     
-    if menuFlag:
-        LastOrderFlag,Position3 = Base_func.match_template("LastOrder_sign")
-        if LastOrderFlag:
-            Serial.touch(Position3[0],Position3[1])
-            print("Entered last order success")
-            return "LastOrder"
-        else:
-            Serial.touch(791,155)
-            print("Entered default success")
-            return "Default"
-    elif reenterFlag:
+    # if menuFlag:
+    #     LastOrderFlag,Position3 = Base_func.match_template("LastOrder_sign")
+    #     if LastOrderFlag:
+    #         Serial.touch(Position3[0],Position3[1])
+    #         print("Entered last order success")
+    #         return "LastOrder"
+    #     else:
+    #         Serial.touch(791,155)
+    #         print("Entered default success")
+    #         return "Default"
+    if reenterFlag:
         Serial.touch(Position2[0],Position2[1]) 
         print("Reentered battle success") 
         return "Reenter"
@@ -202,53 +203,7 @@ def battle():
     time.sleep(8)                          #等待战斗开始
     WaitForBattleStart()    
     #time.sleep(6)                   #等待6秒，因为礼装效果掉落暴击星会耗时
-    """
-    #Turn1
-    character_skill(3,1,1)
-    character_skill(2,1,1)
-    character_skill(1,2)  
-    card()
-    
-    #Serial.mouse_set_zero()         #鼠标复位,防止误差累积
-    time.sleep(10)                          #等待战斗动画播放完成
-    Current_state.WaitForBattleStart()
-    #Turn2
-    character_skill(3,3,1)
-    Master_skill(Mystic_Codes.Chaldea_Combat_Uniform, 3,3,2)
-    character_skill(3,3)
-    character_skill(3,2)
-    card()    
-    
-    #Serial.mouse_set_zero()         #鼠标复位,防止误差累积
-    time.sleep(10)                          #等待战斗动画播放完成
-    Current_state.WaitForBattleStart()
-    #Turn3
-    character_skill(3,1,1)
-    character_skill(2,3,1)
-    card()
-    """
-    character_skill(3,3,1)
-    character_skill(3,2,1)
-    character_skill(3,1)
-    character_skill(2,3,1)
-    character_skill(2,2,1)
-    character_skill(2,1)
-    character_skill(1,2)
-    #Master_skill(Mystic_Codes.Tropical_Summer, 2,1,1)    
-    card()
-    time.sleep(10)
-    WaitForBattleStart()
-    
-    #character_skill(3,3,1)
-    card()
-    time.sleep(10)
-    WaitForBattleStart()
-    
-    #character_skill(2,3,1)
-    #character_skill(2,2)
-    #character_skill(3,2)
-    #character_skill(1,1)
-    card()
+    selfSkill.FirstLevel() #设定好的技能模块
 
 def FGO_process(times=1,servant="CBA"):
     for i in range(times):

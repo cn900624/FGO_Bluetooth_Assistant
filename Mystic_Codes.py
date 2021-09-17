@@ -25,7 +25,20 @@ def Chaldea_Combat_Uniform(*args):
             Serial.touch(530,530)
             
     Hanlder(*args)
- 
+
+#换人服
+def The_Fifth_Element(*args):
+    def Hanlder(*args):
+        if args[0]==1:                     #红魔放
+            Serial.touch(618,173)        
+        elif args[0]==2:                   #hp
+            Serial.touch(666,173)        
+        elif args[0]==3:                   #np+黄金率
+            Serial.touch(716,173)   
+            Serial.touch(246+(args[1]-1)*175,245)  #技能选人      
+            Serial.touch(530,530)
+    Hanlder(*args)
+
 #热带夏日
 def Tropical_Summer(*args):
     def Hanlder(*args):
