@@ -17,9 +17,7 @@ const_phone = "iPhone12"
 # 1080*607    leng-2*bias-2*21=1080  649-16-26=607
 # 864*400  宽 
 
-config = {"iPhone6":{"name":"Wormhole(iPhone11)","length":1122,"bias":0},
-          "iPhone12":{"name":"Wormhole(iPhone)","length":906,"bias":0},
-          "iPadmini4":{"name":"Wormhole(iPad (2))","length":1122,"bias":0}}
+config = {"iPhone12":{"name":"Wormhole(iPhone)","length":906,"bias":0}}
 wormholeHeight=20
 wormholeWeight=21
 const_position = win32api.GetSystemMetrics(win32con.SM_CXSCREEN) - \

@@ -31,7 +31,7 @@ template_path_str = "G:/Documents/github/FGO_Bluetooth_Assistant/Template/"
 手机调整 暂且仅测试iphone12
 const_phone = "iPhone12" 
 修改虫洞程序名称 跟实际匹配
-config = {"iPhone12":{"name":"Wormhole(iPhone)","length":1357,"bias":117}}
+config = {"iPhone12":{"name":"Wormhole(iPhone)","length":906,"bias":0}}
 ``` 
 3. 调整技能,宝具  
 ```
@@ -45,5 +45,5 @@ FGO_process(1,"Caster_Altria") 循环1次, 助战为C呆 Caster_Altria=>请查�
 ```
 pip install opencv-python numpy twilio pywin32 pyserial
 ```
-5. 运行`FGO_func`
+5. 在选择助战页面运行`FGO_func`
 
