@@ -227,43 +227,46 @@ def battle():
     character_skill(2,3,1)
     card()
     """
-    character_skill(3,1,1)
-    character_skill(2,1,1)
-    character_skill(1,2)
-    Master_skill(Mystic_Codes.Tropical_Summer, 2,1,1)    
-    card()
-    time.sleep(10)
-    WaitForBattleStart()
-    
     character_skill(3,3,1)
+    character_skill(3,2,1)
+    character_skill(3,1)
+    character_skill(2,3,1)
+    character_skill(2,2,1)
+    character_skill(2,1)
+    character_skill(1,2)
+    #Master_skill(Mystic_Codes.Tropical_Summer, 2,1,1)    
     card()
     time.sleep(10)
     WaitForBattleStart()
     
-    character_skill(2,3,1)
-    character_skill(2,2)
-    character_skill(3,2)
-    character_skill(1,1)
+    #character_skill(3,3,1)
+    card()
+    time.sleep(10)
+    WaitForBattleStart()
+    
+    #character_skill(2,3,1)
+    #character_skill(2,2)
+    #character_skill(3,2)
+    #character_skill(1,1)
     card()
 
 def FGO_process(times=1,servant="CBA"):
     for i in range(times):
         times-=1
-        enter_battle()
-        apple_feed()
-        find_friend(servant)
         
+        find_friend(servant)
         battle()        
         quit_battle()                
         print(" ")
         print(" {}times of battles remain.".format(times))
         print(" Currently {} Gold Apples, {} Silver Apples used, {} Crafts droped.".format(gc.num_GoldApple_used,gc.num_SilverApple_used,gc.num_Craft))
-      
+        enter_battle()
+        apple_feed()
 def main():
     #Serial.port_open(port_no)   #写入通讯的串口号
     Base_func.init_wormhole()
     Serial.mouse_set_zero()
-    FGO_process(1,"CBA")
+    FGO_process(1,"Caster_Altria")
     #Serial.port_close()
     print(" All done!") 
         
