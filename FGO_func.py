@@ -128,12 +128,12 @@ def budao():
     finFlag = False
     attackFlag = False
     while not(finFlag):
-        Serial.touch(960,510)   #点击attack按钮 
+        Serial.touch(730,335)   #点击attack按钮 
         time.sleep(1)       
         Card_index = random.sample(range(0,4),3) #随机三张牌   
-        Serial.touch(115+(Card_index[0])*215,430)          
-        Serial.touch(115+(Card_index[1])*215,430)  
-        Serial.touch(115+(Card_index[2])*215,430)
+        Serial.touch(141+(Card_index[0])*152,285)          
+        Serial.touch(141+(Card_index[1])*152,285)  
+        Serial.touch(141+(Card_index[2])*152,285)
         print(" Card has pressed")
         while not(finFlag or attackFlag):
             finFlag,Position = Base_func.match_template("Battlefinish_sign")
