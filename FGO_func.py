@@ -155,11 +155,11 @@ def quit_battle():
         print(" 翻车，进入补刀程序")          #翻车检测
         budao()
     print(" Battle finished")
-    time.sleep(3)
+    # time.sleep(1)
     # rainbowFlag,Position = Base_func.match_template("Rainbow_box")  #检测是否掉礼装，若掉落则短信提醒  
     # if rainbowFlag:
     #     gc.num_Craft += 1
-    Serial.touch(690,350,6)    
+    Serial.touch(690,350,4)    
     Serial.touch(266,343,2)                #拒绝好友申请
     Serial.mouse_set_zero()         #鼠标复位,防止误差累积
     print(" Quit success")

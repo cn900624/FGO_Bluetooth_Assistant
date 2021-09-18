@@ -49,4 +49,6 @@ FGO_process(1,"Caster_Altria") 循环1次, 助战为C呆 Caster_Altria=>请查�
 pip install opencv-python numpy twilio pywin32 pyserial
 ```
 5. 在选择助战页面运行`FGO_func`
+6. 建议自己把助战最后登录图 助战技能图 攻击按钮下标图 战斗结束后羁绊增加图 吃苹果的图 都自己截取下 不然可能识别有问题  
+AP_recover  Attack_button  Caster_Altria_skill_level  friend_sign Gold_apple  Silver_apple
 
