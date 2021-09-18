@@ -99,7 +99,7 @@ def match_template(filename,show_switch=False,err=0.85):
     player = cv.matchTemplate(img, player_template, cv.TM_CCOEFF_NORMED)
 
     min_val, max_val, min_loc, max_loc = cv.minMaxLoc(player)
-    print(max_val)
+    #print(max_val)
     #当图片中有与模板匹配度超过95%的部分时：
     if max_val>err:
         #框选出目标，并标出中心点
@@ -168,7 +168,7 @@ def window_capture():
     #img = cv.imread(filename)
     #截取出ios屏幕区域
     cropped = img[gc.wormholeHeight:height-26, (gc.wormholeWeight+gc.config[gc.const_phone]["bias"]):width-(gc.wormholeWeight+gc.config[gc.const_phone]["bias"])]  # 裁剪坐标为[y0:y1, x0:x1]
-    cv.imwrite('E:\Documents\GitHub\FGO_Bluetooth_Assistant\ee/3.jpg', cropped) #for testing
+    #cv.imwrite('E:\Documents\GitHub\FGO_Bluetooth_Assistant\ee/3.jpg', cropped) #for testing
     
     win32gui.DeleteObject(saveBitMap.GetHandle()) #释放内存
     saveDC.DeleteDC()
