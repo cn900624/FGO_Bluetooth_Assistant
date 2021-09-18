@@ -84,7 +84,7 @@ def apple_feed():
     
     goldFlag,goldPosition = Base_func.match_template("Gold_apple")
     if goldFlag:
-        Serial.touch(goldPosition[0],goldPosition[1])
+        Serial.touch(goldPosition[0]+80,goldPosition[1])
         time.sleep(1.5)                
         Serial.touch(550,313) #决定
         gc.num_GoldApple_used += 1
@@ -93,7 +93,7 @@ def apple_feed():
 
     silverFlag,silverPosition = Base_func.match_template("Silver_apple")          #check similarity between highlight and normal icon   
     if silverFlag:
-        Serial.touch(silverPosition[0],silverPosition[1])
+        Serial.touch(silverPosition[0]+80,silverPosition[1])
         time.sleep(1.5)            
         Serial.touch(550,313)   #决定
         gc.num_SilverApple_used += 1
@@ -221,7 +221,7 @@ def FGO_process(times=1,servant="CBA"):
         print(" {}times of battles remain.".format(times))
         print(" Currently {} Gold Apples, {} Silver Apples used, {} Crafts droped.".format(gc.num_GoldApple_used,gc.num_SilverApple_used,gc.num_Craft))
         enter_battle()
-        if i<times:
+        if times>0:
             apple_feed()
         end = time.time()
         print("打一次本大概花了"+str(int(end-start))+"秒")
@@ -230,7 +230,7 @@ def main():
     #Serial.port_open(port_no)   #写入通讯的串口号
     Base_func.init_wormhole()
     Serial.mouse_set_zero()
-    FGO_process(4,"Caster_Altria")
+    FGO_process(10,"Caster_Altria")
     #Serial.port_close()
     print(" All done!") 
         
