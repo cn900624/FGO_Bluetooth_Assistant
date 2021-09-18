@@ -219,12 +219,13 @@ def FGO_process(times=1,servant="CBA"):
         print(" {}times of battles remain.".format(times))
         print(" Currently {} Gold Apples, {} Silver Apples used, {} Crafts droped.".format(gc.num_GoldApple_used,gc.num_SilverApple_used,gc.num_Craft))
         enter_battle()
-        apple_feed()
+        if i<times:
+            apple_feed()
 def main():
     #Serial.port_open(port_no)   #写入通讯的串口号
     Base_func.init_wormhole()
     Serial.mouse_set_zero()
-    FGO_process(10,"Caster_Altria")
+    FGO_process(4,"Caster_Altria")
     #Serial.port_close()
     print(" All done!") 
         
