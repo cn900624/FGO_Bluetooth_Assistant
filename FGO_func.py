@@ -82,15 +82,6 @@ def apple_feed():
         print(" No need to feed apple")
         return
     
-    silverFlag,silverPosition = Base_func.match_template("Silver_apple")          #check similarity between highlight and normal icon   
-    if silverFlag:
-        Serial.touch(silverPosition[0],silverPosition[1])
-        time.sleep(1.5)            
-        Serial.touch(550,313)   #决定
-        gc.num_SilverApple_used += 1
-        print(" Feed silver apple success")
-        return
-    
     goldFlag,goldPosition = Base_func.match_template("Gold_apple")
     if goldFlag:
         Serial.touch(goldPosition[0],goldPosition[1])
@@ -98,6 +89,15 @@ def apple_feed():
         Serial.touch(550,313) #决定
         gc.num_GoldApple_used += 1
         print(" Feed gold apple success")
+        return
+
+    silverFlag,silverPosition = Base_func.match_template("Silver_apple")          #check similarity between highlight and normal icon   
+    if silverFlag:
+        Serial.touch(silverPosition[0],silverPosition[1])
+        time.sleep(1.5)            
+        Serial.touch(550,313)   #决定
+        gc.num_SilverApple_used += 1
+        print(" Feed silver apple success")
         return
     
     print(" No apple remain")
