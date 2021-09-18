@@ -120,7 +120,7 @@ def find_friend(servant):
         WaitForFriendShowReady()   
         foundFlag,Position = Base_func.match_template(servant+"_skill_level")
         attemptnum += 1
-        time.sleep(11) 
+        time.sleep(3) 
         
     print(" Success find",servant)
     Serial.touch(Position[0],Position[1]-60)
