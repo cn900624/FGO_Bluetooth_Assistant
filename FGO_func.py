@@ -12,6 +12,7 @@ import Base_func_wormhole as Base_func
 import Mystic_Codes
 import Global_Config as gc
 import selfSkill
+import datetime
 #from Notice import sent_message
 
 
@@ -210,6 +211,7 @@ def battle():
 
 def FGO_process(times=1,servant="CBA"):
     for i in range(times):
+        start = time.time()
         times-=1
         
         find_friend(servant)
@@ -221,6 +223,9 @@ def FGO_process(times=1,servant="CBA"):
         enter_battle()
         if i<times:
             apple_feed()
+        end = time.time()
+        print("打一次本大概花了"+str(int(end-start))+"秒")
+
 def main():
     #Serial.port_open(port_no)   #写入通讯的串口号
     Base_func.init_wormhole()
