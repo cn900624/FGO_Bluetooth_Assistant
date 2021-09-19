@@ -13,7 +13,7 @@ import Mystic_Codes
 import Global_Config as gc
 import selfSkill
 import datetime
-#from Notice import sent_message
+from Notice import sent_message
 
 
 sys.path.append(gc.default_dir) 
@@ -48,6 +48,7 @@ def enter_battle():
         return "Reenter"
     else:
         print("ReadyToBattle Error")
+        sent_message()
         sys.exit(0)
         
         
@@ -101,7 +102,8 @@ def apple_feed():
         return
     
     print(" No apple remain")
-    Serial.touch(0,0)                
+    Serial.touch(0,0)     
+    sent_message()           
     sys.exit(0)
         
         
@@ -160,6 +162,7 @@ def quit_battle():
     rainbowFlag,Position = Base_func.match_template("Rainbow_box")  #检测是否掉礼装，若掉落则短信提醒  
     if rainbowFlag:
         gc.num_Craft += 1
+        sent_message("打到礼装了!")
     Serial.touch(690,350,6)    
     Serial.touch(266,343,2)                #拒绝好友申请
     Serial.mouse_set_zero()         #鼠标复位,防止误差累积
@@ -186,6 +189,7 @@ def Master_skill(func = Mystic_Codes.Chaldea_Combat_Uniform, *args,isErrTry=Fals
             return
     if isErrTry and errCheck:
         print("fail mouse error")
+        sent_message()
         sys.exit(0)
 
     time.sleep(1)    
@@ -217,6 +221,7 @@ def character_skill(character_no,skill_no,para=None,isErrTry=False):   #角色�
             return
     if isErrTry and errCheck:
         print("fail mouse error")
+        sent_message()
         sys.exit(0)
     time.sleep(3)         #等待技能动画时间
     WaitForBattleStart()
@@ -241,6 +246,7 @@ def card(NoblePhantasm_no=1,isErrTry=False):
             return
     if isErrTry and errCheck:
         print("fail mouse error")
+        sent_message()
         sys.exit(0)
     Serial.touch(300+(NoblePhantasm_no-1)*140,110)   #打手宝具,参数可选1-3号宝具位
     Card_index = random.sample(range(0,4),2) #随机两张牌   

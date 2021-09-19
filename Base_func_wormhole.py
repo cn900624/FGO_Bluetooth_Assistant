@@ -10,7 +10,7 @@ import numpy as np
 import win32gui, win32ui, win32con
 import sys
 import Global_Config as gc
-#from Notice import sent_message
+from Notice import sent_message
 
 sys.path.append(gc.default_dir) 
 
@@ -50,7 +50,9 @@ class Fuse:
         if self.value >= self.tolerant_time:
             #sent_message(text='【FGO】: Encounter a fuse error.')
             print("Fuse Error!")
+            sent_message()
             sys.exit(0)
+                    
             
 
 def match_template(filename,show_switch=False,err=0.85):

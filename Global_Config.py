@@ -10,7 +10,7 @@ import win32con, win32api
 default_dir = r"E:\Documents\GitHub\FGO_Bluetooth_Assistant"
 template_path_str = "E:\Documents\GitHub\FGO_Bluetooth_Assistant/Template/"
 const_phone = "iPhone12"
-
+isPushMsg = False
 
 # bias:游戏蓝条宽度 9.3更新后为0 
 # 21 虫洞宽 16高

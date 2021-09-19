@@ -360,6 +360,7 @@ def FullAutoEXCards(cardnum):
     Flag,Position = Base_func.match_template("FriendPointSummon",False, 0.9)
     if not(Flag):
         print("Please enter summon interface")
+        sent_message()
         sys.exit(0)
     
     finished = 0

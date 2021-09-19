@@ -46,7 +46,7 @@ FGO_process(1,"Caster_Altria") 循环1次, 助战为C呆 Caster_Altria=>请查�
 ```
 4. python安装库
 ```
-pip install opencv-python numpy twilio pywin32 pyserial
+pip install opencv-python numpy twilio pywin32 pyserial pyTelegramBotAPI
 ```
 5. 在选择助战页面运行`FGO_func`
 6. 建议自己把助战最后登录图 助战技能图 攻击按钮下标图 战斗结束后羁绊增加图 吃苹果的图 都自己截取下 不然可能识别有问题  
@@ -58,3 +58,4 @@ AP_recover  Attack_button  Caster_Altria_skill_level  friend_sign Gold_apple  Si
 2. 修改无体力判断图片为金苹果 防止检测不准确
 3. 无限池增加抽完后自动重置继续抽 具体看fgo_optional_func.py中注释的代码
   easy.py为个人异常处理 用于无限池抽取 偶尔用于异常技能释放,
+4. 增加tg机器人推送功能模块 详细配置Notice.py 与Global_config

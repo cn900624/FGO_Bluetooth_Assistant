@@ -49,6 +49,7 @@ def wuzang():
     wuzangStatus,pos=Base_func.match_template("wuzangerror",False,0.75)
     if not wuzangStatus:
         print("skill error")
+        sent_message("技能有问题")
         sys.exit()
     fc.card()
     time.sleep(10)

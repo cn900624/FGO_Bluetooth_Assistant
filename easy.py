@@ -40,7 +40,9 @@ for s in range(8):
         time.sleep(3)
         Serial.touch(425, 309) #重置成功
         time.sleep(1)
+ent_message("无限池抽完了")
 sys.exit(0)
+
 for i in range(times):
    # selfSkill.FirstLevel()
     # fc.character_skill(3,3,1)
