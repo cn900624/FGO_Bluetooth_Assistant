@@ -33,6 +33,8 @@ def FirstLevel():
     fc.card()
 
 def wuzang():
+     # 武藏
+    fc.character_skill(1,2)
     # 无限池2 阳间 水武藏+2c呆 通杀所有阳间本
     # c呆
     fc.character_skill(3,3,1)
