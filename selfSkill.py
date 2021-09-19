@@ -44,9 +44,6 @@ def wuzang():
     fc.character_skill(2,3,1)
     fc.character_skill(2,2,1)
     fc.character_skill(2,1)
-    # 武藏
-    fc.character_skill(1,2)
-
     fc.card()
     time.sleep(10)
     fc.WaitForBattleStart()
