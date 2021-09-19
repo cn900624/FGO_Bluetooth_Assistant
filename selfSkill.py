@@ -32,7 +32,7 @@ def FirstLevel():
     fc.Master_skill(Mystic_Codes.Chaldea_Combat_Uniform,1)
     fc.card()
 
-def SecondLevel():
+def wuzang():
     # 无限池2 阳间 水武藏+2c呆 通杀所有阳间本
     # c呆
     fc.character_skill(3,3,1)

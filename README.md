@@ -57,3 +57,4 @@ AP_recover  Attack_button  Caster_Altria_skill_level  friend_sign Gold_apple  Si
 1. 增加部分异常处理(鼠标偏移部分) 但不确定有没有效果 加完以后又突然正常了
 2. 修改无体力判断图片为金苹果 防止检测不准确
 3. 无限池增加抽完后自动重置继续抽 具体看fgo_optional_func.py中注释的代码
+  easy.py为个人异常处理 用于无限池抽取 偶尔用于异常技能释放,

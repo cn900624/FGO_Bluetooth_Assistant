@@ -259,7 +259,7 @@ def battle():
     time.sleep(0.5)   
     # time.sleep(6)                   #等待6秒，因为礼装效果掉落暴击星会耗时
     # selfSkill.SecondLevel() #设定好的技能模块
-    selfSkill.FirstLevel()
+    selfSkill.wuzang()
 
 def FGO_process(times=1,servant="CBA"):
     for i in range(times):
