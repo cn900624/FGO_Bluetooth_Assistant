@@ -1,6 +1,8 @@
 import FGO_func as fc
 import time
+import sys
 import Mystic_Codes
+import Base_func_wormhole as Base_func
 def FirstLevel():
     # 无限池1 阴间 仇凛+迦摩+2c呆
     # c呆
@@ -44,6 +46,10 @@ def wuzang():
     fc.character_skill(2,3,1)
     fc.character_skill(2,2,1)
     fc.character_skill(2,1)
+    wuzangStatus,pos=Base_func.match_template("wuzangerror")
+    if not wuzangStatus:
+        print("skill error")
+        sys.exit()
     fc.card()
     time.sleep(10)
     fc.WaitForBattleStart()
