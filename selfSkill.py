@@ -83,3 +83,33 @@ def ThirdLevel():
     # 第三T
     fc.character_skill(2,3,1)
     fc.card()
+
+def QigeSkills():
+    # 无限池2 阴间 齐格3t 技能需求10-随意-6
+    # 齐格
+    fc.character_skill(1,1)
+    # c呆
+    fc.character_skill(3,3,1)
+    fc.character_skill(3,2,1)
+    fc.character_skill(3,1)
+    fc.character_skill(2,3,1)
+    fc.character_skill(2,2,1)
+    fc.character_skill(2,1)
+    
+    fc.card()
+    time.sleep(10)
+    fc.WaitForBattleStart()
+    # 第二T
+    # 换Cba
+    fc.Master_skill(Mystic_Codes.Chaldea_Combat_Uniform,3,3,1)
+    # cba
+    fc.character_skill(3,3,1)
+    fc.character_skill(1,3)
+    fc.card(2)
+    time.sleep(10)
+    fc.WaitForBattleStart()
+    # 第三T
+    fc.character_skill(1,2)
+    fc.character_skill(3,2)
+    fc.Master_skill(Mystic_Codes.Chaldea_Combat_Uniform,1)
+    fc.card()
