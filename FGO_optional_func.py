@@ -19,11 +19,23 @@ fuse = Base_func.Fuse()
 
 '''
 #无限池抽取函数
-def InfinatePool():
+for s in range(8):
     Serial.mouse_set_zero()
     Serial.mouse_move((316,250))
-    for i in range(100):
+    for i in range(46):
         Serial.mouse_click()
+        time.sleep(0.5)
+        Serial.mouse_click()
+        time.sleep(0.5)
+    print("当次结束"+str(s))
+    resetUnLimit,Position = Base_func.match_template("resetUnLimit")
+    if resetUnLimit:
+        Serial.touch(728, 128) #重置
+        time.sleep(1)
+        Serial.touch(532, 312) #重置确认
+        time.sleep(3)
+        Serial.touch(425, 309) #重置成功
+        time.sleep(1)
 '''
 
 def getpos():

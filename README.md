@@ -52,3 +52,8 @@ pip install opencv-python numpy twilio pywin32 pyserial
 6. 建议自己把助战最后登录图 助战技能图 攻击按钮下标图 战斗结束后羁绊增加图 吃苹果的图 都自己截取下 不然可能识别有问题  
 AP_recover  Attack_button  Caster_Altria_skill_level  friend_sign Gold_apple  Silver_apple
 
+## 更新日志
+### 2021-09-19
+1. 增加部分异常处理(鼠标偏移部分) 但不确定有没有效果 加完以后又突然正常了
+2. 修改无体力判断图片为金苹果 防止检测不准确
+3. 无限池增加抽完后自动重置继续抽 具体看fgo_optional_func.py中注释的代码

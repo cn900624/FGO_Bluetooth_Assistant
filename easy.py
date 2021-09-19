@@ -17,15 +17,60 @@ import FGO_func as fc
 import time
 import Mystic_Codes
 import selfSkill
+import sys
 Base_func.init_wormhole()
 times=1
-casterSkillImg="Snipaste_2021-09-17_12-11-49"
 #确保没有非C呆的好友 按照HP/ATK排序进一步确保
 #助战
-#name,poisition=Base_func.match_template("Caster_Altria_skill_level")
+#无限池抽取函数
+for s in range(8):
+    Serial.mouse_set_zero()
+    Serial.mouse_move((316,250))
+    for i in range(46):
+        Serial.mouse_click()
+        time.sleep(0.5)
+        Serial.mouse_click()
+        time.sleep(0.5)
+    print("当次结束"+str(s))
+    resetUnLimit,Position = Base_func.match_template("resetUnLimit")
+    if resetUnLimit:
+        Serial.touch(728, 128) #重置
+        time.sleep(1)
+        Serial.touch(532, 312) #重置确认
+        time.sleep(3)
+        Serial.touch(425, 309) #重置成功
+        time.sleep(1)
+sys.exit(0)
 for i in range(times):
-    #selfSkill.FirstLevel()
-    fc.apple_feed()
+   # selfSkill.FirstLevel()
+    # fc.character_skill(3,3,1)
+    #fc.character_skill(3,2,1)
+    #fc.character_skill(3,1)
+    #换C呆c
+    fc.Master_skill(Mystic_Codes.Chaldea_Combat_Uniform,3,3,1)
+    #2号C呆
+    fc.character_skill(3,3,1)
+    fc.character_skill(3,2,1)
+    fc.character_skill(3,1)
+    # 仇凛
+    fc.character_skill(1,1)
+    fc.card()
+    time.sleep(10)
+    fc.WaitForBattleStart()
+    # 第二T
+    # 迦摩
+    fc.character_skill(2,2)
+    fc.character_skill(2,3)
+    fc.card(2)
+    time.sleep(10)
+    fc.WaitForBattleStart()
+    # 第三T
+    fc.character_skill(1,2,2)
+    fc.character_skill(1,3)
+    fc.character_skill(2,1,1)
+    fc.Master_skill(Mystic_Codes.Chaldea_Combat_Uniform,1)
+    fc.card()
+
     print(1)
     # skill,poisitionSkill=Base_func.match_template(casterSkillImg)
     # #技能不满足时候
@@ -67,28 +112,6 @@ for i in range(times):
 # #end
 
 
-    fc.character_skill(3,3,1)
-    fc.character_skill(3,2,1)
-    fc.character_skill(3,1)
-    fc.character_skill(2,3,1)
-    fc.character_skill(2,2,1)
-    fc.character_skill(2,1)
-    fc.character_skill(1,2)
-    #Master_skill(Mystic_Codes.Tropical_Summer, 2,1,1)    
-    fc.card()
-    time.sleep(10)
-    fc.WaitForBattleStart()
-    print("second")
-    #character_skill(3,3,1)
-    fc.card()
-    time.sleep(10)
-    fc.WaitForBattleStart()
-    print("third")
-    fc.card()
-    print("end")
-    fc.quit_battle()
-    #继续
-    Serial.mouse_move((667,504))
 print("all end")
 #Serial.mouse_move(1,2)
 # 若无好友 则GG

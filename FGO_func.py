@@ -77,7 +77,7 @@ def WaitForFriendShowReady():
 def apple_feed(): 
     
     time.sleep(1.5)
-    recoverFlag,Position = Base_func.match_template("AP_recover")
+    recoverFlag,Position = Base_func.match_template("Gold_apple")
     if not(recoverFlag):
         print(" No need to feed apple")
         return
@@ -157,9 +157,9 @@ def quit_battle():
         budao()
     print(" Battle finished")
     time.sleep(1)
-    # rainbowFlag,Position = Base_func.match_template("Rainbow_box")  #检测是否掉礼装，若掉落则短信提醒  
-    # if rainbowFlag:
-    #     gc.num_Craft += 1
+    rainbowFlag,Position = Base_func.match_template("Rainbow_box")  #检测是否掉礼装，若掉落则短信提醒  
+    if rainbowFlag:
+        gc.num_Craft += 1
     Serial.touch(690,350,6)    
     Serial.touch(266,343,2)                #拒绝好友申请
     Serial.mouse_set_zero()         #鼠标复位,防止误差累积
@@ -168,29 +168,80 @@ def quit_battle():
 
 
 #improve        
-def Master_skill(func = Mystic_Codes.Chaldea_Combat_Uniform, *args):
+def Master_skill(func = Mystic_Codes.Chaldea_Combat_Uniform, *args,isErrTry=False):
     Serial.touch(780,180)               #御主技能按键
     func(*args)
+    # 异常处理
+    attackFlag,Position = Base_func.match_template("Attack_button")
+    errCheck,PositionErr= Base_func.match_template("error1")
+    if not isErrTry:
+        if errCheck or attackFlag:
+            print("fail mouse error")
+            #72,121
+            Serial.touch(72,121,8) 
+            #关闭窗口
+            Serial.touch(677,32) 
+            #重新释放技能
+            Master_skill(func,skill_no,*args)
+            return
+    if isErrTry and errCheck:
+        print("fail mouse error")
+        sys.exit(0)
+
     time.sleep(1)    
     WaitForBattleStart()
     print(" Master skill{} has pressed".format(args[0]))
     time.sleep(1)
 
     
-def character_skill(character_no,skill_no,para=None):   #角色编号，技能编号，选人（可选）
+def character_skill(character_no,skill_no,para=None,isErrTry=False):   #角色编号，技能编号，选人（可选）
     charPos = (66+(character_no-1)*175+(skill_no-1)*50,306)
     Serial.touch(charPos[0],charPos[1])    
+    
     if para != None:
         targetPos = (246+(para-1)*175,245)  #技能选人
-        Serial.touch(targetPos[0],targetPos[1])        
+        Serial.touch(targetPos[0],targetPos[1])    
+    time.sleep(0.2)   
+    #若技能释放失败，则空白处多点几次看是否能把技能纠正回来
+    attackFlag,Position = Base_func.match_template("Attack_button")
+    errCheck,PositionErr= Base_func.match_template("error1")
+    if not isErrTry:
+        if errCheck or attackFlag:
+            print("fail mouse error")
+            #72,121
+            Serial.touch(72,121,8) 
+            #关闭窗口
+            Serial.touch(677,32) 
+            #重新释放技能
+            character_skill(character_no,skill_no,para,True)
+            return
+    if isErrTry and errCheck:
+        print("fail mouse error")
+        sys.exit(0)
     time.sleep(3)         #等待技能动画时间
     WaitForBattleStart()
     print(" Character{}'s skill{} has pressed".format(character_no,skill_no))
 
     
-def card(NoblePhantasm_no=1):    
+def card(NoblePhantasm_no=1,isErrTry=False):    
     Serial.touch(730,335)   #点击attack按钮 
-    time.sleep(2)       
+    time.sleep(0.2)       
+    attackFlag,Position = Base_func.match_template("Attack_button")
+    errCheck,PositionErr= Base_func.match_template("error1")
+    time.sleep(2) 
+    if not isErrTry:
+        if errCheck or attackFlag:
+            print("fail mouse error")
+            #72,121
+            Serial.touch(72,121,8) 
+            #关闭窗口
+            Serial.touch(677,32) 
+            #重新释放技能
+            card(NoblePhantasm_no,isErrTry)
+            return
+    if isErrTry and errCheck:
+        print("fail mouse error")
+        sys.exit(0)
     Serial.touch(300+(NoblePhantasm_no-1)*140,110)   #打手宝具,参数可选1-3号宝具位
     Card_index = random.sample(range(0,4),2) #随机两张牌   
     Serial.touch(141+(Card_index[0])*152,285)          
@@ -207,7 +258,8 @@ def battle():
     Serial.mouse_set_zero()         #鼠标复位,防止误差累积  
     time.sleep(0.5)   
     # time.sleep(6)                   #等待6秒，因为礼装效果掉落暴击星会耗时
-    selfSkill.FirstLevel() #设定好的技能模块
+    # selfSkill.SecondLevel() #设定好的技能模块
+    selfSkill.FirstLevel()
 
 def FGO_process(times=1,servant="CBA"):
     for i in range(times):
