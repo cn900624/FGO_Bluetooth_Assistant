@@ -46,7 +46,7 @@ def wuzang():
     fc.character_skill(2,3,1)
     fc.character_skill(2,2,1)
     fc.character_skill(2,1)
-    wuzangStatus,pos=Base_func.match_template("wuzangerror")
+    wuzangStatus,pos=Base_func.match_template("wuzangerror",False,0.75)
     if not wuzangStatus:
         print("skill error")
         sys.exit()
