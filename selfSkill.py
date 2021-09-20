@@ -3,6 +3,7 @@ import time
 import sys
 import Mystic_Codes
 import Base_func_wormhole as Base_func
+from Notice import sent_message
 def FirstLevel():
     # 无限池1 阴间 仇凛+迦摩+2c呆
     # c呆
