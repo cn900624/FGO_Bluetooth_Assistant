@@ -23,13 +23,12 @@ fuse = Base_func.Fuse()
 # 异常时候的处理
 # 空白区域点击指定次数
 def errorAction():
-    print("fail mouse error")
     # 随意点击几次
-    Serial.touch(72,70,Global_Config.clickRestCount) 
+    Serial.touch(72,70,gc.clickRestCount) 
     #角色详情页面关闭按钮
-    Serial.touch(677,32) 
+    #Serial.touch(677,32) 
     #换人礼装技能关闭按钮
-    Serial.touch(677,32) 
+    #Serial.touch(677,32) 
     time.sleep(0.4)   
 
 def enter_battle():
@@ -57,7 +56,6 @@ def enter_battle():
     #         return "Default"
     if reenterFlag:
         Serial.touch(Position2[0],Position2[1]) 
-        print("Reentered battle success") 
         return "Reenter"
     else:
         print("ReadyToBattle Error")
@@ -93,7 +91,6 @@ def apple_feed():
     time.sleep(1.5)
     recoverFlag,Position = Base_func.match_template("Gold_apple")
     if not(recoverFlag):
-        print(" No need to feed apple")
         return
     
     goldFlag,goldPosition = Base_func.match_template("Gold_apple")
@@ -114,7 +111,6 @@ def apple_feed():
         print(" Feed silver apple success")
         return
     
-    print(" No apple remain")
     Serial.touch(0,0)     
     sent_message()           
     sys.exit(0)
@@ -126,7 +122,6 @@ def find_friend(servant):
     attemptnum = 1
     #找310CBA直到找到为止
     while not(foundFlag):
-        print(" Didn't find {}, retry. Attempt{}".format(servant,attemptnum))
         #Flag,Position = Base_func.match_template('Refresh_friend')
         Serial.touch(514,74)   #refresh     
         time.sleep(0.5)
@@ -137,7 +132,6 @@ def find_friend(servant):
         attemptnum += 1
         time.sleep(3) 
         
-    print(" Success find",servant)
     Serial.touch(Position[0],Position[1]-60)
     time.sleep(1.5)               
 
@@ -152,7 +146,6 @@ def budao():
         Serial.touch(141+(Card_index[0])*152,285)          
         Serial.touch(141+(Card_index[1])*152,285)  
         Serial.touch(141+(Card_index[2])*152,285)
-        print(" Card has pressed")
         while not(finFlag or attackFlag):
             finFlag,Position = Base_func.match_template("Battlefinish_sign")
             attackFlag,Position = Base_func.match_template("Attack_button")
@@ -170,7 +163,6 @@ def quit_battle():
     elif attackFlag:
         print(" 翻车，进入补刀程序")          #翻车检测
         budao()
-    print(" Battle finished")
     time.sleep(1)
     rainbowFlag,Position = Base_func.match_template("Rainbow_box")  #检测是否掉礼装，若掉落则短信提醒  
     if rainbowFlag:
@@ -179,7 +171,6 @@ def quit_battle():
     Serial.touch(725,350,6)    
     Serial.touch(266,343,2)                #拒绝好友申请
     Serial.mouse_set_zero()         #鼠标复位,防止误差累积
-    print(" Quit success")
     time.sleep(1)
 
 
@@ -188,29 +179,30 @@ def Master_skill(func = Mystic_Codes.Chaldea_Combat_Uniform, *args,isErrTry=Fals
     time.sleep(0.2)  
     Serial.touch(780,180)               #御主技能按键
     func(*args)
-    # 异常处理
+    #若技能释放失败，则空白处多点几次看是否能把技能纠正回来
     attackFlag,Position = Base_func.match_template("Attack_button")
     errCheck,PositionErr= Base_func.match_template("error1")
-    if not isErrTry:
-        if errCheck or attackFlag:
-            errorAction()
-            #重新释放技能
+    # 正常应该没有攻击按钮
+    if attackFlag or errCheck:
+        print("master释放失败")
+        errorAction()
+        # 关闭错误页
+        if errCheck:
+            Serial.touch(PositionErr[0],PositionErr[1]) 
+            time.sleep(0.3)
+        if not isErrTry:#防止无限重复
             Master_skill(func,*args,True)
-            return
-    if isErrTry and errCheck:
-        print("礼装技能失败")
-        sent_message("礼装技能失败")
-        sys.exit(0)
-    time.sleep(1)    
-    WaitForBattleStart()
-    print(" Master skill{} has pressed".format(args[0]))
-    time.sleep(1)
-
+        else:
+            print("master再次释放失败")
+            sys.exit()
+    #仅成功要等待
+    if not isErrTry:
+        WaitForBattleStart()
+        time.sleep(1)
     
 def character_skill(character_no,skill_no,para=None,isErrTry=False):   #角色编号，技能编号，选人（可选）
     charPos = (66+(character_no-1)*175+(skill_no-1)*50,306)
     Serial.touch(charPos[0],charPos[1])    
-    
     if para != None:
         targetPos = (246+(para-1)*175,245)  #技能选人
         Serial.touch(targetPos[0],targetPos[1])    
@@ -218,49 +210,61 @@ def character_skill(character_no,skill_no,para=None,isErrTry=False):   #角色�
     #若技能释放失败，则空白处多点几次看是否能把技能纠正回来
     attackFlag,Position = Base_func.match_template("Attack_button")
     errCheck,PositionErr= Base_func.match_template("error1")
-    if not isErrTry:
-        if errCheck or attackFlag:
-            errorAction()
+    # 正常应该没有攻击按钮
+    if attackFlag or errCheck:
+        print("技能释放失败")
+        errorAction()
+        # 关闭错误页
+        if errCheck:
+            Serial.touch(PositionErr[0],PositionErr[1]) 
+            time.sleep(0.3)
+        if not isErrTry:#防止无限重复
             character_skill(character_no,skill_no,para,True)
-            return
-    if isErrTry and errCheck:
-        print("技能释放再次失败")
-        sent_message("技能释放再次失败")
-        sys.exit(0)
-    time.sleep(3)         #等待技能动画时间
-    WaitForBattleStart()
-    print(" Character{}'s skill{} has pressed".format(character_no,skill_no))
+        else:
+            print("技能再次释放失败")
+            sys.exit()
+    #仅成功要等待
+    if not isErrTry:
+        time.sleep(2.5)         #等待技能动画时间
+        WaitForBattleStart()
+
 
     
-def card(successImg,NoblePhantasm_no=1):    
+
+    
+def card(successImg,NoblePhantasm_no=1,isErrTry=False):    
     # 769,369 宝具返回按钮位置
     Serial.touch(730,335)   #点击attack按钮 
     time.sleep(2)       
     Serial.touch(300+(NoblePhantasm_no-1)*140,63)   #打手宝具,参数可选1-3号宝具位
     Card_index = random.sample(range(0,4),2) #随机两张牌   
     Serial.touch(141+(Card_index[0])*152,285)          
+    time.sleep(0.1) 
+    successImgFlag,Position = Base_func.match_template(successImg)
     Serial.touch(141+(Card_index[1])*152,285)  
-    successImg,Position = Base_func.match_template(successImg)
     attackFlag,Position = Base_func.match_template("Attack_button")
     # 宝具没被选中 
-    if not successImg:
+    if not successImgFlag:
+        print("宝具释放失败")
         # 不在点击攻击页面 则额外按返回攻击页面
         if not attackFlag:
             #返回攻击页面
             Serial.touch(769,369)
-            time.sleep(0.4)
+            time.sleep(1)
         #重置点击
         errorAction()
         #重新选择宝具
-        print("宝具释放失败")
-        card(successImg,NoblePhantasm_no)
-    print(" Card has pressed")
+        
+        if not isErrTry:#防止无限重复
+            card(successImg,NoblePhantasm_no,True)
+        else:
+            print("宝具再次释放失败")
+            sys.exit()
     
 def battle(): 
     #判断是否进入战斗界面
     
     Serial.touch(773,365)      
-    print(" Start battle button pressed")
     time.sleep(6)                          #等待战斗开始
     WaitForBattleStart()  
     Serial.mouse_set_zero()         #鼠标复位,防止误差累积  
@@ -277,7 +281,6 @@ def FGO_process(times=1,servant="CBA"):
         find_friend(servant)
         battle()        
         quit_battle()                
-        print(" ")
         print(" {}times of battles remain.".format(times))
         print(" Currently {} Gold Apples, {} Silver Apples used, {} Crafts droped.".format(gc.num_GoldApple_used,gc.num_SilverApple_used,gc.num_Craft))
         enter_battle()

@@ -23,56 +23,59 @@ times=1
 #确保没有非C呆的好友 按照HP/ATK排序进一步确保
 #助战
 #无限池抽取函数
-for s in range(8):
-    Serial.mouse_set_zero()
-    Serial.mouse_move((316,250))
-    for i in range(46):
-        Serial.mouse_click()
-        time.sleep(0.5)
-        Serial.mouse_click()
-        time.sleep(0.5)
-    print("当次结束"+str(s))
-    resetUnLimit,Position = Base_func.match_template("resetUnLimit")
-    if resetUnLimit:
-        Serial.touch(728, 128) #重置
-        time.sleep(1)
-        Serial.touch(532, 312) #重置确认
-        time.sleep(3)
-        Serial.touch(425, 309) #重置成功
-        time.sleep(1)
-ent_message("无限池抽完了")
-sys.exit(0)
+# for s in range(8):
+#     Serial.mouse_set_zero()
+#     Serial.mouse_move((316,250))
+#     for i in range(46):
+#         Serial.mouse_click()
+#         time.sleep(0.5)
+#         Serial.mouse_click()
+#         time.sleep(0.5)
+#     print("当次结束"+str(s))
+#     resetUnLimit,Position = Base_func.match_template("resetUnLimit")
+#     if resetUnLimit:
+#         Serial.touch(728, 128) #重置
+#         time.sleep(1)
+#         Serial.touch(532, 312) #重置确认
+#         time.sleep(3)
+#         Serial.touch(425, 309) #重置成功
+#         time.sleep(1)
+# ent_message("无限池抽完了")
+# sys.exit(0)
 
 for i in range(times):
-   # selfSkill.FirstLevel()
+    errCheck,PositionErr= Base_func.match_template("error1")
+    print(errCheck)
+    print(PositionErr)
+    # fc.character_skill(1,1)
     # fc.character_skill(3,3,1)
-    #fc.character_skill(3,2,1)
-    #fc.character_skill(3,1)
-    #换C呆c
-    fc.Master_skill(Mystic_Codes.Chaldea_Combat_Uniform,3,3,1)
-    #2号C呆
-    fc.character_skill(3,3,1)
-    fc.character_skill(3,2,1)
-    fc.character_skill(3,1)
-    # 仇凛
-    fc.character_skill(1,1)
-    fc.card()
-    time.sleep(10)
-    fc.WaitForBattleStart()
+    # fc.character_skill(3,2,1)
+    # fc.character_skill(3,1)
+    # fc.character_skill(2,3,1)
+    # fc.character_skill(2,2,1)
+    # fc.character_skill(2,1)
+    # # 怕释放失败导致np不足
+    # qigeskills,pos=Base_func.match_template("qigefail",False,0.75)
+    # if not qigeskills:
+    #     print("skill error")
+    #     sent_message("技能有问题")
+    #     sys.exit()
+    # fc.card("qigeMain")
+    # time.sleep(10)
+    # fc.WaitForBattleStart()
     # 第二T
-    # 迦摩
-    fc.character_skill(2,2)
-    fc.character_skill(2,3)
-    fc.card(2)
-    time.sleep(10)
-    fc.WaitForBattleStart()
-    # 第三T
-    fc.character_skill(1,2,2)
-    fc.character_skill(1,3)
-    fc.character_skill(2,1,1)
-    fc.Master_skill(Mystic_Codes.Chaldea_Combat_Uniform,1)
-    fc.card()
-
+    # 换Cba
+    #fc.Master_skill(Mystic_Codes.Chaldea_Combat_Uniform,3,3,1)
+    # cba
+    #fc.character_skill(3,3,1)
+    #fc.character_skill(1,3)
+    # fc.card("qigeMain")
+    # time.sleep(10)
+    # fc.WaitForBattleStart()
+    # # 第三T
+    # fc.character_skill(1,2)
+    # fc.character_skill(3,2)
+    # fc.Master_skill(Mystic_Codes.Chaldea_Combat_Uniform,1)
     print(1)
     # skill,poisitionSkill=Base_func.match_template(casterSkillImg)
     # #技能不满足时候

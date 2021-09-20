@@ -55,7 +55,7 @@ class Fuse:
                     
             
 
-def match_template(filename,show_switch=False,err=0.85):
+def match_template(filename,show_switch=False,err=gc.imgMatch):
     '''
     Given the file name of the template, attempts to find the portion 
     that matchs the template and returns the result

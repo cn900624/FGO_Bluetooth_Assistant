@@ -106,7 +106,7 @@ def QigeSkills():
         print("skill error")
         sent_message("技能有问题")
         sys.exit()
-    fc.card()
+    fc.card("qigeMain")
     time.sleep(10)
     fc.WaitForBattleStart()
     # 第二T
@@ -115,11 +115,11 @@ def QigeSkills():
     # cba
     fc.character_skill(3,3,1)
     fc.character_skill(1,3)
-    fc.card()
+    fc.card("qigeMain")
     time.sleep(10)
     fc.WaitForBattleStart()
     # 第三T
     fc.character_skill(1,2)
     fc.character_skill(3,2)
     fc.Master_skill(Mystic_Codes.Chaldea_Combat_Uniform,1)
-    fc.card()
+    fc.card("qigeMain")

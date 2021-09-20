@@ -8,6 +8,7 @@ Created on Fri Sep  4 22:46:30 2020
 import sys
 import Serial_wormhole as Serial
 import Global_Config as gc   #added
+import time
 
 sys.path.append(gc.default_dir) 
 
@@ -20,7 +21,8 @@ def Chaldea_Combat_Uniform(*args):
             Serial.touch(666,173)        
         elif args[0]==3:                   #换人
             Serial.touch(716,173)                           
-            Serial.touch(485+(args[2]-1)*113,200)        
+            Serial.touch(485+(args[2]-1)*113,200)   
+            time.sleep(0.1)   
             Serial.touch(147+(args[1]-1)*113,200)        
             Serial.touch(430,350)
             
