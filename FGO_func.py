@@ -14,7 +14,7 @@ import Global_Config as gc
 import selfSkill
 import datetime
 from Notice import sent_message
-clickRestCount=11
+
 
 
 sys.path.append(gc.default_dir) 
@@ -24,9 +24,11 @@ fuse = Base_func.Fuse()
 # 空白区域点击指定次数
 def errorAction():
     print("fail mouse error")
-    #72,121
-    Serial.touch(72,70,clickRestCount) 
-    #关闭窗口
+    # 随意点击几次
+    Serial.touch(72,70,Global_Config.clickRestCount) 
+    #角色详情页面关闭按钮
+    Serial.touch(677,32) 
+    #换人礼装技能关闭按钮
     Serial.touch(677,32) 
     time.sleep(0.4)   
 
@@ -196,10 +198,9 @@ def Master_skill(func = Mystic_Codes.Chaldea_Combat_Uniform, *args,isErrTry=Fals
             Master_skill(func,*args,True)
             return
     if isErrTry and errCheck:
-        print("fail mouse error again")
-        sent_message()
+        print("礼装技能失败")
+        sent_message("礼装技能失败")
         sys.exit(0)
-
     time.sleep(1)    
     WaitForBattleStart()
     print(" Master skill{} has pressed".format(args[0]))
@@ -223,33 +224,36 @@ def character_skill(character_no,skill_no,para=None,isErrTry=False):   #角色�
             character_skill(character_no,skill_no,para,True)
             return
     if isErrTry and errCheck:
-        print("fail mouse error again")
-        sent_message()
+        print("技能释放再次失败")
+        sent_message("技能释放再次失败")
         sys.exit(0)
     time.sleep(3)         #等待技能动画时间
     WaitForBattleStart()
     print(" Character{}'s skill{} has pressed".format(character_no,skill_no))
 
     
-def card(NoblePhantasm_no=1,isErrTry=False):    
+def card(successImg,NoblePhantasm_no=1):    
+    # 769,369 宝具返回按钮位置
     Serial.touch(730,335)   #点击attack按钮 
-    time.sleep(0.2)       
-    attackFlag,Position = Base_func.match_template("Attack_button")
-    errCheck,PositionErr= Base_func.match_template("error1")
-    time.sleep(2) 
-    if not isErrTry:
-        if errCheck or attackFlag:
-            errorAction()
-            card(NoblePhantasm_no,True)
-            return
-    if isErrTry and errCheck:
-        print("fail mouse error again")
-        sent_message()
-        sys.exit(0)
+    time.sleep(2)       
     Serial.touch(300+(NoblePhantasm_no-1)*140,63)   #打手宝具,参数可选1-3号宝具位
     Card_index = random.sample(range(0,4),2) #随机两张牌   
     Serial.touch(141+(Card_index[0])*152,285)          
-    Serial.touch(141+(Card_index[1])*152,285)    
+    Serial.touch(141+(Card_index[1])*152,285)  
+    successImg,Position = Base_func.match_template(successImg)
+    attackFlag,Position = Base_func.match_template("Attack_button")
+    # 宝具没被选中 
+    if not successImg:
+        # 不在点击攻击页面 则额外按返回攻击页面
+        if not attackFlag:
+            #返回攻击页面
+            Serial.touch(769,369)
+            time.sleep(0.4)
+        #重置点击
+        errorAction()
+        #重新选择宝具
+        print("宝具释放失败")
+        card(successImg,NoblePhantasm_no)
     print(" Card has pressed")
     
 def battle(): 

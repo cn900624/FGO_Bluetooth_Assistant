@@ -100,8 +100,9 @@ def QigeSkills():
     fc.character_skill(2,3,1)
     fc.character_skill(2,2,1)
     fc.character_skill(2,1)
-    wuzangStatus,pos=Base_func.match_template("qigefail",False,0.75)
-    if not wuzangStatus:
+    # 怕释放失败导致np不足
+    qigeskills,pos=Base_func.match_template("qigefail",False,0.75)
+    if not qigeskills:
         print("skill error")
         sent_message("技能有问题")
         sys.exit()
