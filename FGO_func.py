@@ -14,10 +14,21 @@ import Global_Config as gc
 import selfSkill
 import datetime
 from Notice import sent_message
+clickRestCount=11
 
 
 sys.path.append(gc.default_dir) 
 fuse = Base_func.Fuse()
+
+# 异常时候的处理
+# 空白区域点击指定次数
+def errorAction():
+    rint("fail mouse error")
+    #72,121
+    Serial.touch(72,121,clickRestCount) 
+    #关闭窗口
+    Serial.touch(677,32) 
+    time.sleep(0.4)   
 
 def enter_battle():
     # menuFlag,Position1 = Base_func.match_template("Menu_button")
@@ -179,16 +190,12 @@ def Master_skill(func = Mystic_Codes.Chaldea_Combat_Uniform, *args,isErrTry=Fals
     errCheck,PositionErr= Base_func.match_template("error1")
     if not isErrTry:
         if errCheck or attackFlag:
-            print("fail mouse error")
-            #72,121
-            Serial.touch(72,121,8) 
-            #关闭窗口
-            Serial.touch(677,32) 
+            errorAction()
             #重新释放技能
             Master_skill(func,*args,True)
             return
     if isErrTry and errCheck:
-        print("fail mouse error")
+        print("fail mouse error again")
         sent_message()
         sys.exit(0)
 
@@ -211,16 +218,11 @@ def character_skill(character_no,skill_no,para=None,isErrTry=False):   #角色�
     errCheck,PositionErr= Base_func.match_template("error1")
     if not isErrTry:
         if errCheck or attackFlag:
-            print("fail mouse error")
-            #72,121
-            Serial.touch(72,121,8) 
-            #关闭窗口
-            Serial.touch(677,32) 
-            #重新释放技能
+            errorAction()
             character_skill(character_no,skill_no,para,True)
             return
     if isErrTry and errCheck:
-        print("fail mouse error")
+        print("fail mouse error again")
         sent_message()
         sys.exit(0)
     time.sleep(3)         #等待技能动画时间
@@ -236,19 +238,14 @@ def card(NoblePhantasm_no=1,isErrTry=False):
     time.sleep(2) 
     if not isErrTry:
         if errCheck or attackFlag:
-            print("fail mouse error")
-            #72,121
-            Serial.touch(72,121,8) 
-            #关闭窗口
-            Serial.touch(677,32) 
-            #重新释放技能
+            errorAction()
             card(NoblePhantasm_no,isErrTry,True)
             return
     if isErrTry and errCheck:
-        print("fail mouse error")
+        print("fail mouse error again")
         sent_message()
         sys.exit(0)
-    Serial.touch(300+(NoblePhantasm_no-1)*140,110)   #打手宝具,参数可选1-3号宝具位
+    Serial.touch(300+(NoblePhantasm_no-1)*140,63)   #打手宝具,参数可选1-3号宝具位
     Card_index = random.sample(range(0,4),2) #随机两张牌   
     Serial.touch(141+(Card_index[0])*152,285)          
     Serial.touch(141+(Card_index[1])*152,285)    
