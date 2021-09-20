@@ -240,7 +240,7 @@ def card(NoblePhantasm_no=1,isErrTry=False):
     if not isErrTry:
         if errCheck or attackFlag:
             errorAction()
-            card(NoblePhantasm_no,isErrTry,True)
+            card(NoblePhantasm_no,True)
             return
     if isErrTry and errCheck:
         print("fail mouse error again")
