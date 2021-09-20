@@ -163,7 +163,7 @@ def quit_battle():
     if rainbowFlag:
         gc.num_Craft += 1
         sent_message("打到礼装了!")
-    Serial.touch(690,350,6)    
+    Serial.touch(725,350,6)    
     Serial.touch(266,343,2)                #拒绝好友申请
     Serial.mouse_set_zero()         #鼠标复位,防止误差累积
     print(" Quit success")
@@ -265,7 +265,7 @@ def battle():
     time.sleep(0.5)   
     # time.sleep(6)                   #等待6秒，因为礼装效果掉落暴击星会耗时
     # selfSkill.SecondLevel() #设定好的技能模块
-    selfSkill.wuzang()
+    selfSkill.QigeSkills()
 
 def FGO_process(times=1,servant="CBA"):
     for i in range(times):
@@ -286,11 +286,13 @@ def FGO_process(times=1,servant="CBA"):
 
 def main():
     #Serial.port_open(port_no)   #写入通讯的串口号
+    sent_message("begin play games")
     Base_func.init_wormhole()
     Serial.mouse_set_zero()
-    FGO_process(10,"Caster_Altria")
+    FGO_process(3,"Caster_Altria")
     #Serial.port_close()
     print(" All done!") 
+    sent_message("all done!")
         
 if __name__=="__main__":
 	main()

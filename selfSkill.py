@@ -99,7 +99,11 @@ def QigeSkills():
     fc.character_skill(2,3,1)
     fc.character_skill(2,2,1)
     fc.character_skill(2,1)
-    
+    wuzangStatus,pos=Base_func.match_template("qigefail",False,0.75)
+    if not wuzangStatus:
+        print("skill error")
+        sent_message("技能有问题")
+        sys.exit()
     fc.card()
     time.sleep(10)
     fc.WaitForBattleStart()
@@ -109,7 +113,7 @@ def QigeSkills():
     # cba
     fc.character_skill(3,3,1)
     fc.character_skill(1,3)
-    fc.card(2)
+    fc.card()
     time.sleep(10)
     fc.WaitForBattleStart()
     # 第三T
