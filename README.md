@@ -49,10 +49,13 @@ FGO_process(1,"Caster_Altria") 循环1次, 助战为C呆 Caster_Altria=>请查�
 pip install opencv-python numpy twilio pywin32 pyserial pyTelegramBotAPI
 ```
 5. 在选择助战页面运行`FGO_func`
-6. 建议自己把助战最后登录图 助战技能图 攻击按钮下标图 战斗结束后羁绊增加图 吃苹果的图 都自己截取下 不然可能识别有问题  
+6. 建议自己把助战最后登录图 助战技能图 攻击按钮下标图 战斗结束后羁绊增加图 吃苹果的图 角色主要技能异常 角色宝具图片 都自己截取下 不然可能识别有问题  
 AP_recover  Attack_button  Caster_Altria_skill_level  friend_sign Gold_apple  Silver_apple
 
 ## 更新日志
+### 2021-09-20
+1. 优化宝具页面异常处理(鼠标偏移部分)
+
 ### 2021-09-19
 1. 增加部分异常处理(鼠标偏移部分) 但不确定有没有效果 加完以后又突然正常了
 2. 修改无体力判断图片为金苹果 防止检测不准确
