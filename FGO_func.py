@@ -23,9 +23,9 @@ fuse = Base_func.Fuse()
 # 异常时候的处理
 # 空白区域点击指定次数
 def errorAction():
-    rint("fail mouse error")
+    print("fail mouse error")
     #72,121
-    Serial.touch(72,121,clickRestCount) 
+    Serial.touch(72,70,clickRestCount) 
     #关闭窗口
     Serial.touch(677,32) 
     time.sleep(0.4)   
@@ -183,6 +183,7 @@ def quit_battle():
 
 #improve        
 def Master_skill(func = Mystic_Codes.Chaldea_Combat_Uniform, *args,isErrTry=False):
+    time.sleep(0.2)  
     Serial.touch(780,180)               #御主技能按键
     func(*args)
     # 异常处理
