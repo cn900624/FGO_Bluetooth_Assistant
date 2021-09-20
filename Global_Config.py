@@ -18,7 +18,7 @@ imgMatch = 0.8
 # 21 虫洞宽 16高
 # 1080*607    leng-2*bias-2*21=1080  649-16-26=607
 # 864*400  宽 
-clickRestCount=1 # 无线连接建议11 有线建议1
+clickRestCount=11
 config = {"iPhone12":{"name":"Wormhole(iPhone)","length":906,"bias":0}}
 wormholeHeight=20
 wormholeWeight=21

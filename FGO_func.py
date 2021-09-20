@@ -24,7 +24,7 @@ fuse = Base_func.Fuse()
 # 空白区域点击指定次数
 def errorAction():
     # 随意点击几次
-    Serial.touch(72,70,gc.clickRestCount) 
+    Serial.touch(72,70,gc.clickRestCount,0.1) 
     #角色详情页面关闭按钮
     #Serial.touch(677,32) 
     #换人礼装技能关闭按钮
