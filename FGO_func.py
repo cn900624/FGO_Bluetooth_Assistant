@@ -194,6 +194,7 @@ def Master_skill(func = Mystic_Codes.Chaldea_Combat_Uniform, *args,isErrTry=Fals
             Master_skill(func,*args,True)
         else:
             print("master再次释放失败")
+            sent_message("master再次释放失败")
             sys.exit()
     #仅成功要等待
     if not isErrTry:
@@ -222,6 +223,7 @@ def character_skill(character_no,skill_no,para=None,isErrTry=False):   #角色�
             character_skill(character_no,skill_no,para,True)
         else:
             print("技能再次释放失败")
+            sent_message("技能再次释放失败")
             sys.exit()
     #仅成功要等待
     if not isErrTry:
@@ -259,8 +261,25 @@ def card(successImg,NoblePhantasm_no=1,isErrTry=False):
             card(successImg,NoblePhantasm_no,True)
         else:
             print("宝具再次释放失败")
+            sent_message("宝具再次释放失败")
             sys.exit()
-    
+    time.sleep(3)
+    successImgFlag,Position = Base_func.match_template(successImg)
+    if  successImgFlag:
+        print("宝具释放失败1")
+        # 不在点击攻击页面 则额外按返回攻击页面
+        Serial.touch(769,369)
+        time.sleep(1)
+        #重置点击
+        errorAction()
+        #重新选择宝具
+        if not isErrTry:#防止无限重复
+            card(successImg,NoblePhantasm_no,True)
+        else:
+            print("宝具再次释放失败1")
+            sent_message("宝具再次释放失败1")
+            sys.exit()
+
 def battle(): 
     #判断是否进入战斗界面
     
