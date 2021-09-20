@@ -185,7 +185,7 @@ def Master_skill(func = Mystic_Codes.Chaldea_Combat_Uniform, *args,isErrTry=Fals
             #关闭窗口
             Serial.touch(677,32) 
             #重新释放技能
-            Master_skill(func,skill_no,*args)
+            Master_skill(func,*args,True)
             return
     if isErrTry and errCheck:
         print("fail mouse error")
@@ -242,7 +242,7 @@ def card(NoblePhantasm_no=1,isErrTry=False):
             #关闭窗口
             Serial.touch(677,32) 
             #重新释放技能
-            card(NoblePhantasm_no,isErrTry)
+            card(NoblePhantasm_no,isErrTry,True)
             return
     if isErrTry and errCheck:
         print("fail mouse error")
@@ -286,10 +286,10 @@ def FGO_process(times=1,servant="CBA"):
 
 def main():
     #Serial.port_open(port_no)   #写入通讯的串口号
-    sent_message("begin play games")
+    #sent_message("begin play games")
     Base_func.init_wormhole()
     Serial.mouse_set_zero()
-    FGO_process(3,"Caster_Altria")
+    FGO_process(10,"Caster_Altria")
     #Serial.port_close()
     print(" All done!") 
     sent_message("all done!")
