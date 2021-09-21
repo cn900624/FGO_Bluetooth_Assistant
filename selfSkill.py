@@ -123,3 +123,30 @@ def QigeSkills():
     fc.character_skill(3,2)
     fc.Master_skill(Mystic_Codes.Chaldea_Combat_Uniform,1)
     fc.card("qigeMain")
+
+def WaterLilisSkills():
+    # 莉莉丝
+    fc.character_skill(1,1)
+    # c呆
+    fc.character_skill(3,3,1)
+    fc.character_skill(3,2,1)
+    fc.character_skill(3,1)
+    fc.character_skill(2,3,1)
+    fc.character_skill(2,2,1)
+    fc.character_skill(2,1)
+    # 怕释放失败导致np不足
+    waterLilis,pos=Base_func.match_template("lilisFail",False,0.75)
+    if not waterLilis:
+        print("skill error")
+        sent_message("技能有问题")
+        sys.exit()
+    fc.card("lilisMain")
+    time.sleep(10)
+    fc.WaitForBattleStart()
+    # 第二T
+    fc.card("lilisMain")
+    time.sleep(10)
+    fc.WaitForBattleStart()
+    # 第三T
+    fc.character_skill(1,3)
+    fc.card("lilisMain")
