@@ -135,10 +135,10 @@ def WaterLilisSkills():
     fc.character_skill(2,2,1)
     fc.character_skill(2,1)
     # 怕释放失败导致np不足
-    waterLilis,pos=Base_func.match_template("lilisFail",False,0.75)
+    waterLilis,pos=Base_func.match_template("lilisFail",False,0.95)
     if not waterLilis:
         print("skill error")
-        sent_message("技能有问题")
+        sent_message("技能有问题?")
         sys.exit()
     fc.card("lilisMain")
     time.sleep(10)
@@ -148,5 +148,5 @@ def WaterLilisSkills():
     time.sleep(10)
     fc.WaitForBattleStart()
     # 第三T
-    fc.character_skill(1,3)
+    #fc.character_skill(1,3)
     fc.card("lilisMain")
